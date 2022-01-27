@@ -4,6 +4,12 @@ variable "project_name" {
   default     = "Monorepo"
 }
 
+variable "container_app_name" {
+  description = "Name of the serverless application"
+  type        = string
+  default     = "container-app"
+}
+
 variable "serverless_app_name" {
   description = "Name of the serverless application"
   type        = string
