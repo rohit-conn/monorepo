@@ -1,6 +1,11 @@
-variable "serverless_app_name" {
-  default     = "serverless-app"
+variable "project_name" {
+  description = "Name of the project"
   type        = string
-  description = "Name of the container application"
+  default     = "Monorepo"
+}
 
+variable "serverless_app_name" {
+  description = "Name of the serverless application"
+  type        = string
+  default     = "serverless-app"
 }

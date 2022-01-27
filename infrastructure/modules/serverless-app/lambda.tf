@@ -1,12 +1,3 @@
-# resource "aws_lambda_layer_version" "this" {
-#   count = length(var.layers)
-#
-#   filename            = var.layers[count.index]
-#   source_code_hash    = filebase64sha256(var.layers[count.index])
-#   layer_name          = format("%s-layer-%s", var.name, count.index)
-#   compatible_runtimes = [var.python_runtime]
-# }
-
 data "archive_file" "lambda_function_archive" {
   type         = "zip"
   source_file  = var.source_path
