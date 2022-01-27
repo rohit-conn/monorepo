@@ -17,19 +17,32 @@ resource "aws_ecs_task_definition" "this" {
   network_mode       = "awsvpc"
   cpu                = 256
   memory             = 512
-  container_definitions = jsonencode([
-    {
-      name      = var.name
-      image     = var.ecr_repo
-      essential = true
-      portMappings = [
-        {
-          containerPort = var.port
-          hostPort      = var.port
-        }
-      ]
+
+
+  container_definitions = <<DEFINITION
+[
+  {
+    "name": "${var.name}",
+    "image": "${var.ecr_repo}",
+    "essential": true,
+    "portMappings": [
+      {
+        "protocol": "tcp",
+        "containerPort": ${var.port},
+        "hostPort": ${var.port}
+      }
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "/fargate/service/",
+        "awslogs-region": "eu-west-1",
+        "awslogs-stream-prefix": "ecs"
+      }
     }
-  ])
+  }
+]
+DEFINITION
 }
 
 resource "aws_ecs_service" "this" {
