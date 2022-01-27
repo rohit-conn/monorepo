@@ -35,7 +35,7 @@ resource "aws_ecs_task_definition" "this" {
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {
-        "awslogs-group": "/fargate/service/",
+        "awslogs-group": "${aws_cloudwatch_log_group.this.name}",
         "awslogs-region": "eu-west-1",
         "awslogs-stream-prefix": "ecs"
       }

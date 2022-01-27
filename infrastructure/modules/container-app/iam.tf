@@ -19,4 +19,16 @@ data "aws_iam_policy_document" "execution" {
     actions   = ["ecr:*"]
     resources = ["*"]
   }
+  statement {
+    sid       = "CloudwatchAccess"
+    effect    = "Allow"
+    actions   = [
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents",
+      "logs:DescribeLogStreams"
+    ]
+    resources = ["arn:aws:logs:*:*:*"]
+  }
+
   }
