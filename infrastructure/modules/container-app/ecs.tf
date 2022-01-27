@@ -53,6 +53,7 @@ resource "aws_ecs_service" "this" {
 
   network_configuration {
     subnets          = var.public_subnets
+    security_groups  = [module.security_group_ecs.security_group_id]
     assign_public_ip = true
   }
 
