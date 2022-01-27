@@ -10,7 +10,7 @@
 data "archive_file" "lambda_function_archive" {
   type         = "zip"
   source_file  = var.source_path
-  output_path  = "./${var.name}.zip"
+  output_path  = "./build/${var.name}.zip"
 }
 
 resource "aws_lambda_function" "this" {
