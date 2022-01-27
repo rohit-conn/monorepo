@@ -1,5 +1,8 @@
 # monorepo
 
+## Prerequistes.
+
+Terraform version 1.0.1 is required to deploy the infrastructure.
 
 This repo consists of three components:
 
@@ -30,4 +33,38 @@ docker tag containerapp:latest 560276875947.dkr.ecr.eu-west-1.amazonaws.com/cont
 aws ecr --profile testget --region eu-west-1 get-login-password | docker login --username AWS --password-stdin 560276875947.dkr.ecr.eu-west-1.amazonaws.com/container-app:latest ## use this to authenticate with ECS
 
 docker push 560276875947.dkr.ecr.eu-west-1.amazonaws.com/container-app:latest
+```
+Go to the infrastructure directory and run terraform
+```
+terrafom apply -target module.container_app
+```
+
+
+
+
+## General setup
+
+All the infrastructure is running currently. Ive included the local state file in case if its required to play with infra.
+
+For provisioning/deporivisioning move the state files from the state directory to the infrastructure directory and go about what you want to do.
+
+To destroy existing infra:
+
+Serverless app:
+```
+terraform init
+terraform destroy -target .module.serverless_app
+```
+
+Conatiner app:
+
+```
+terraform init
+terraform destroy -target .module.container_app
+```
+
+Once destroyed you can recreate again using
+
+```
+terraform apply <module which you want to populate.>
 ```
